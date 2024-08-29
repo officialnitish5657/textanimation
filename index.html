@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            flex-direction: column;
+            gap: 5rem
+        }
+
+        h1 {
+            width: 75%;
+            height: 14vh;
+            overflow: hidden;
+            border: 2px solid black;
+            font-family: system-ui;
+            font-size: min(6vw, 50px);
+            font-weight: 900;
+            gap: 10px;
+        }
+        h1 span{
+            opacity: 1;
+            scale: 1;
+        }
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            font-size: 30px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 500;
+            padding: 0.7rem 2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px
+        }
+
+        button span:hover {
+            scale: 2;
+        }
+
+        /* button sapn:hover */
+    </style>
+</head>
+
+<body class="flex">
+
+    <h1 class="flex">
+        <span>P</span>
+        <span>R</span>
+        <span>O</span>
+        <span>G</span>
+        <span>R</span>
+        <span>A</span>
+        <span>M</span>
+        <span>I</span>
+        <span>N</span>
+        <span>G</span>
+    </h1>
+    <button>
+        <span>S</span>
+        <span>t</span>
+        <span>a</span>
+        <span>r</span>
+        <span>t</span>
+        <span style="margin-left:10px;">A</span>
+        <span>n</span>
+        <span>i</span>
+        <span>m</span>
+        <span>a</span>
+        <span>t</span>
+        <span>i</span>
+        <span>o</span>
+        <span>n</span>
+    </button>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        let span = document.querySelectorAll("h1 span");
+        let spanlen = span.length / 2;
+        console.log(spanlen)
+        span.forEach((val, index) => {
+            if (index < spanlen) {
+                val.classList.add("a");
+            }
+            else {
+                val.classList.add("b");
+
+            }
+        })
+        let istrue = true;
+        let tl = gsap.timeline({
+            onComplete: function () {
+                istrue = true;
+                console.log(istrue);
+                gsap.to("h1 span",{
+                    y:0,
+                    color:"red",
+                })
+                
+            }
+        })
+        document.querySelector("button").addEventListener("click", function () {
+            console.log(istrue);
+            if (istrue) {
+                istrue =false;
+                animation()
+            }
+        })
+        function animation() {
+            tl.from(".a", {
+                opacity: 0,
+                scale: 0,
+                y: 80,
+                duration: 0.6,
+                delay: 0.5,
+                // scrub:1,
+                ease: "power4",
+                // ease: "power5.out",
+                stagger: 0.15,
+
+            })
+            gsap.from(".b", {
+                opacity: 0,
+                scale: 0,
+                y: 80,
+                duration: 0.6,
+                delay: 0.5,
+                // scrub:1,
+                ease: "power4",
+                // ease: "power5.out",
+                stagger: -0.15,
+
+            })
+            // istrue= false;
+        }
+    </script>
+</body>
+
+</html>
